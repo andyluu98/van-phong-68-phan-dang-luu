@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phối cảnh</title>
+  <meta name="description" content="Mặt bằng tầng 1 thành ngôi nhà khi cuộn trang: tường mọc lên từ bản vẽ, rồi đi qua từng tầng." />
+  <meta name="theme-color" content="#efebe2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/trang.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="hat" id="hat" aria-hidden="true"></div>
+
+  <div class="nap" id="nap">
+    <p data-don-vi></p>
+    <p class="nap__chu">Đang dựng ngôi nhà từ bản vẽ…</p>
+  </div>
+
+  <header class="dau">
+    <a class="dau__ten" href="#" data-len-dau data-don-vi></a>
+    <span class="dau__cong-trinh" data-ten></span>
+  </header>
+
+  <section class="hero" id="hero">
+    <p class="hero__nho"><span data-don-vi></span> <span>·</span> <span data-ten></span></p>
+    <h1>Mọi ngôi nhà<br />bắt đầu từ<br />một <em>bản vẽ.</em></h1>
+    <p class="hero__dan" id="hero-dan">Cuộn xuống để bước vào bản vẽ: tường mọc lên, rồi đi qua từng tầng.</p>
+    <p class="hero__cuon">Cuộn để đi vào <i></i></p>
+  </section>
+
+  <div class="khung-ten" id="khung-ten" aria-hidden="true">
+    <div><span>Đơn vị</span><b data-don-vi></b></div>
+    <div><span>Công trình</span><b data-ten></b></div>
+    <div><span>Bản vẽ</span><b id="kt-tang1"></b></div>
+    <div><span>Tỷ lệ</span><b>1 : 100</b></div>
+  </div>
+
+  <p class="cat" id="cat">Dựng từ bản vẽ: tường tầng 1, sàn tầng trên, rồi từng tầng lên tới mái.</p>
+
+  <div class="chu-thich" id="chu-thich"><i></i><b></b><span></span></div>
+
+  <nav class="thuoc" aria-hidden="true"><div class="thuoc__ray" id="thuoc"></div><div class="thuoc__da" id="tien-do"></div></nav>
+
+  <main class="duong" id="duong"></main>
+
+  <section class="cuoi" id="cuoi">
+    <p class="cuoi__nho" data-don-vi></p>
+    <h2>Từ bản vẽ<br />đến <em>ngôi nhà.</em></h2>
+    <p>Mô hình trên trang này được dựng thẳng từ bản vẽ: tường, cột, cửa, cầu thang, mái và nội thất đều lấy từ mặt bằng.</p>
+    <a class="nut" href="#" data-len-dau>Xem lại từ đầu</a>
+  </section>
+
+  <footer class="chan">Dựng trực tiếp trong trình duyệt từ bản vẽ · Vân vật liệu: Poly Haven (CC0)</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
