@@ -70,7 +70,8 @@ const bauTroi = new THREE.Mesh(
 );
 bauTroi.renderOrder = -10;
 scene.add(bauTroi);
-const choTroi = new RGBELoader().loadAsync(GOC_TAI_NGUYEN + 'troi/qwantani_late_afternoon_puresky_2k.hdr').then((hdr) => {
+const TROI = GOC_TAI_NGUYEN + 'troi/qwantani_late_afternoon_puresky_';
+const choTroi = new RGBELoader().loadAsync(TROI + '1k.hdr').catch(() => new RGBELoader().loadAsync(TROI + '2k.hdr')).then((hdr) => {
   hdr.mapping = THREE.EquirectangularReflectionMapping;
   scene.environment = new THREE.PMREMGenerator(renderer).fromEquirectangular(hdr).texture;
   bauTroi.material.map = hdr;
@@ -324,16 +325,23 @@ async function batDau() {
     scene.add(net);
     matBang[t.ma] = { to, net };
   }
-  // show how far the textures have loaded (about 32 MB the first time)
+  // The opening (paper plan, line drawing, floors rising) needs no textures,
+  // so the page opens at once and the textures (about 2.3 MB) and the sky load
+  // behind it, with a small counter in the corner. Frame capture still waits.
+  const CHUP_KHUNG = thamSo.has('quay') || thamSo.has('anh') || thamSo.has('s');
   let troiXong = false;
   choTroi.then(() => (troiXong = true));
-  const chuNap = document.querySelector('.nap__chu');
+  const chuNap = CHUP_KHUNG ? document.querySelector('.nap__chu') : document.createElement('div');
+  if (!CHUP_KHUNG) { chuNap.className = 'nap-ngam'; document.body.appendChild(chuNap); }
   const demNap = setInterval(() => {
     const [a, b] = tienDoVan();
     chuNap.textContent = `Đang tải vật liệu ${Math.round((100 * (a + (troiXong ? 1 : 0))) / (b + 1))}%…`;
   }, 300);
-  await Promise.all([vanSanSang(), choTroi]);
-  clearInterval(demNap);
+  const xongVan = Promise.all([vanSanSang(), choTroi]).finally(() => {
+    clearInterval(demNap);
+    if (!CHUP_KHUNG) { chuNap.classList.add('xong'); setTimeout(() => chuNap.remove(), 1200); }
+  });
+  if (CHUP_KHUNG) await xongVan;
   bocCuc();
   renderer.shadowMap.needsUpdate = true;
   window.__ve = (s) => { ve(s); return { ...cuoiCung, loi: loi.slice() }; };

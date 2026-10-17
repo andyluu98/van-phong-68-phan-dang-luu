@@ -107,13 +107,28 @@ export const vanSanSang = () => Promise.all(cho);
 let daXong = 0;
 export const tienDoVan = () => [daXong, cho.length];
 
+// 1x1 stand-ins so materials render flat (no shader change) until the real
+// texture arrives: white colour/roughness, a flat normal
+const tamThoi = (rgb) => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 1;
+  const g = c.getContext('2d');
+  g.fillStyle = rgb;
+  g.fillRect(0, 0, 1, 1);
+  return c;
+};
+const TAM = { mau: tamThoi('#ffffff'), nham: tamThoi('#ffffff'), nor: tamThoi('#8080ff') };
+
 function van(ten, kenh, { srgb = false, co = 1, xoay = 0 } = {}) {
-  const t = new THREE.Texture();
+  const t = new THREE.Texture(TAM[kenh]);
+  t.needsUpdate = true;
   t.wrapS = t.wrapT = THREE.RepeatWrapping;
   t.repeat.set(1 / co, 1 / co);
   t.rotation = xoay;
   if (srgb) t.colorSpace = THREE.SRGBColorSpace;
-  cho.push(nap.loadAsync(`${GOC_TAI_NGUYEN}van/${ten}/${kenh}.jpg`).then((src) => {
+  // light .webp (tools/nen_van.py); the full-size .jpg only if it is missing
+  const duong = `${GOC_TAI_NGUYEN}van/${ten}/${kenh}`;
+  cho.push(nap.loadAsync(duong + '.webp').catch(() => nap.loadAsync(duong + '.jpg')).then((src) => {
     daXong++;
     t.image = src.image;
     t.anisotropy = doNet;

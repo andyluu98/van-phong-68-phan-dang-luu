@@ -27,6 +27,12 @@ body { background: var(--giay); color: var(--muc); font-family: var(--chu); font
 }
 .nap__chu { font-weight: 400; letter-spacing: 0; color: var(--mo); font-size: 14px; }
 .nap.xong { opacity: 0; visibility: hidden; }
+/* small counter while textures load behind the opening */
+.nap-ngam {
+  position: fixed; top: 26px; left: 50%; transform: translateX(-50%); z-index: 11; pointer-events: none;
+  font-size: 11px; color: var(--mo); letter-spacing: .02em; transition: opacity .8s ease;
+}
+.nap-ngam.xong { opacity: 0; }
 
 .dau {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center;
