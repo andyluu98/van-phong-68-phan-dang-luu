@@ -406,7 +406,9 @@ function cauThang(X, th, t) {
   const doan = th.doan ?? [];
   const tong = doan.reduce((s, d) => s + (d.loai === 've' ? d.so_bac : 0), 0) || 1;
   const h = (den.cao_do - t.e) / tong;
-  const dat = t.i === 0, waist = 200;
+  // solid under the flights on the ground floor; `dac: false` for a stair that
+  // starts on an upper floor (a tower modelled from floor N)
+  const dat = th.dac ?? t.i === 0, waist = 200;
   const mat = (n) => (n[1] < -0.5 ? 'tran' : 'da');
   const o = { nap: false };
   let z = t.e;

@@ -45,7 +45,7 @@ export const MOC = { giay: 0.035, nghieng: 0.10, dung: 0.20, phu: 0.245, dat: 0.
 const O = 100; // cell size, mm
 const BAN_KINH = 260; // clearance from obstacles
 
-function dungLuoi(t) {
+export function dungLuoi(t) {
   const dat = t.i === 0;
   const vung = dat ? [Math.min(LO_DAT[0], NHA_HCN[0]), Math.min(LO_DAT[1], NHA_HCN[1]), Math.max(LO_DAT[2], NHA_HCN[2]), Math.max(LO_DAT[3], NHA_HCN[3])] : NHA_HCN;
   const x0 = vung[0] - 200, y0 = vung[1] - 200;
@@ -81,7 +81,7 @@ function dungLuoi(t) {
 }
 
 // nearest free cell to a plan point
-function ganNhat(L, x, y) {
+export function ganNhat(L, x, y) {
   const [ci, cj] = L.o(x, y);
   for (let r = 0; r < 60; r++) {
     let best = null, bd = Infinity;
@@ -96,7 +96,7 @@ function ganNhat(L, x, y) {
 }
 
 // A* on the grid, 8 neighbours; returns plan points (mm)
-function timDuong(L, a, b) {
+export function timDuong(L, a, b) {
   const A = ganNhat(L, ...a), B = ganNhat(L, ...b);
   if (!A || !B) return null;
   const { nx } = L, key = (i, j) => j * nx + i;
@@ -128,7 +128,7 @@ function timDuong(L, a, b) {
 }
 
 // keep only the corners a person would walk to (line of sight on the grid)
-function rutGon(L, pts) {
+export function rutGon(L, pts) {
   if (!pts || pts.length < 3) return pts;
   const thay = (a, b) => {
     const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / (O / 2)));
@@ -152,7 +152,7 @@ function rutGon(L, pts) {
 // ---------------------------------------------------------------------------
 // viewpoints: where to stand in a room and what to look at
 // ---------------------------------------------------------------------------
-function diemNhin(L, t, p) {
+export function diemNhin(L, t, p) {
   const [x0, y0, x1, y1] = p.hcn;
   const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
   const doDac = (MB(t.ma).noi_that ?? []).filter((v) => {

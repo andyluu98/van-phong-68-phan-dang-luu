@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Tham quan</title>
+  <meta name="description" content="Tham quan tự do: bấm vào từng phòng để đứng trong phòng, kéo để nhìn quanh, bấm sàn để đi tới." />
+  <meta name="theme-color" content="#efebe2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/trang.css" />
+  <link rel="stylesheet" href="css/tham-quan.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body class="tq">
+  <canvas id="gl" aria-hidden="true"></canvas>
+
+  <div class="nap" id="nap">
+    <p data-don-vi></p>
+    <p class="nap__chu">Đang dựng mô hình…</p>
+  </div>
+
+  <header class="tq-dau">
+    <div class="tq-dau__ten"><b data-don-vi></b><span data-ten></span></div>
+    <a class="tq-nut tq-nut--nhe" href="index.html">Xem phối cảnh cuộn</a>
+  </header>
+
+  <div class="tq-phong-hien" id="phong-hien" aria-live="polite"></div>
+  <div id="nhan" class="tq-nhan"></div>
+
+  <aside class="tq-bang" id="bang">
+    <div class="tq-tab" id="tab" role="tablist"></div>
+    <div class="tq-ds" id="ds"></div>
+    <div class="tq-hanh">
+      <button class="tq-nut" id="nut-bat-dau">Bắt đầu tham quan</button>
+      <button class="tq-nut tq-nut--nhe" id="nut-tong">Nhìn tổng quan tầng</button>
+    </div>
+  </aside>
+
+  <p class="tq-goi-y" id="goi-y"></p>
+  <script type="module" src="js/tham-quan.js"></script>
+</body>
+</html>

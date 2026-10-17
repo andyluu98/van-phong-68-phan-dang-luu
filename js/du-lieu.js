@@ -3663,6 +3663,7 @@ export const NHA = {
    ],
    "thang": {
     "toi": "T12",
+    "dac": false,
     "doan": [
      {
       "loai": "ve",
